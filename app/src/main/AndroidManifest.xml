@@ -29,6 +29,9 @@
           android:name=".LoopPagerActivity" >
         </activity>
         <activity
+            android:name=".LoopPagerBannerActivity" >
+        </activity>
+        <activity
           android:name=".MaterialDemoActivity"
           android:theme="@style/Theme.DesignDemo">
         </activity>

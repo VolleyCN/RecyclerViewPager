@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 
 public class LoopRecyclerViewPager extends RecyclerViewPager {
 
@@ -75,6 +77,7 @@ public class LoopRecyclerViewPager extends RecyclerViewPager {
 
     /**
      * Transform adapter position to actual position.
+     *
      * @param position adapter position
      * @return actual position
      */
@@ -103,16 +106,16 @@ public class LoopRecyclerViewPager extends RecyclerViewPager {
         Log.e("test", bakPosition1 + "/" + bakPosition2 + "/" + bakPosition3 + "/" + getCurrentPosition());
         // get position which is closer to current position
         if (Math.abs(bakPosition1 - getCurrentPosition()) > Math.abs(bakPosition2 -
-                getCurrentPosition())){
+                getCurrentPosition())) {
             if (Math.abs(bakPosition2 -
-                    getCurrentPosition())> Math.abs(bakPosition3 -
+                    getCurrentPosition()) > Math.abs(bakPosition3 -
                     getCurrentPosition())) {
                 return bakPosition3;
             }
             return bakPosition2;
         } else {
             if (Math.abs(bakPosition1 -
-                    getCurrentPosition())> Math.abs(bakPosition3 -
+                    getCurrentPosition()) > Math.abs(bakPosition3 -
                     getCurrentPosition())) {
                 return bakPosition3;
             }
@@ -128,4 +131,15 @@ public class LoopRecyclerViewPager extends RecyclerViewPager {
         }
         return middlePosition;
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent e) {
+        return super.onTouchEvent(e);
+    }
+
+    @Override
+    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+    }
+
 }

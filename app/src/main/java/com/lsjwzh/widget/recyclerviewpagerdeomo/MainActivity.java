@@ -80,6 +80,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, LoopPagerActivity.class));
             }
         });
+        mDemoListAdapter.add(new DemoItem("Loop ViewPager Banner Demo") {
+            @Override
+            void onClick() {
+                startActivity(new Intent(MainActivity.this, LoopPagerBannerActivity.class));
+            }
+        });
         mDemoListAdapter.add(new DemoItem("Reverse Single Fling Pager(like official ViewPager)") {
             @Override
             void onClick() {
