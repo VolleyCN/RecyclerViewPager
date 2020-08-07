@@ -269,17 +269,16 @@ public class RCBanner extends RelativeLayout implements RecyclerViewPager.OnPage
         }
     }
 
-    public RecyclerView.Adapter getAdapter() {
-        if (mViewPager != null) {
-            return mViewPager.getAdapter();
+    public <T extends RecyclerView.Adapter> T getAdapter() {
+        if (mViewPager != null && mViewPager.getAdapter() != null) {
+            return (T) mViewPager.getAdapter();
         }
         return null;
     }
 
-    public RecyclerView getViewPager() {
-        return mViewPager;
+    public <T extends RecyclerView> T getViewPager() {
+        return (T) mViewPager;
     }
-
 
     public void addOnItemTouchListener(RecyclerView.OnItemTouchListener listener) {
         if (mViewPager != null) {
