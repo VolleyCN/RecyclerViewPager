@@ -47,7 +47,6 @@ public class RCBanner extends RelativeLayout implements RecyclerViewPager.OnPage
     private int mPointDrawableResId = R.drawable.rc_banner_selector_point_solid;
     private Drawable mPointContainerBackgroundDrawable;
     private AutoPlayTask mAutoPlayTask;
-    private int mPlaceholderDrawableResId = NO_PLACEHOLDER_DRAWABLE;
     private RelativeLayout mPointContainerRl;
     private boolean mIsNeedShowIndicatorOnOnlyOnePage;
     private int mContentBottomMargin;
@@ -93,31 +92,29 @@ public class RCBanner extends RelativeLayout implements RecyclerViewPager.OnPage
     }
 
     private void initCustomAttr(int attr, TypedArray typedArray) {
-        if (attr == R.styleable.RCBanner_banner_pointDrawable) {
+        if (attr == R.styleable.RCBanner_rc_pointDrawable) {
             mPointDrawableResId = typedArray.getResourceId(attr, R.drawable.rc_banner_selector_point_solid);
-        } else if (attr == R.styleable.RCBanner_banner_pointContainerBackground) {
+        } else if (attr == R.styleable.RCBanner_rc_pointContainerBackground) {
             mPointContainerBackgroundDrawable = typedArray.getDrawable(attr);
-        } else if (attr == R.styleable.RCBanner_banner_pointLeftRightMargin) {
+        } else if (attr == R.styleable.RCBanner_rc_pointLeftRightMargin) {
             mPointLeftRightMargin = typedArray.getDimensionPixelSize(attr, mPointLeftRightMargin);
-        } else if (attr == R.styleable.RCBanner_banner_pointContainerLeftRightPadding) {
+        } else if (attr == R.styleable.RCBanner_rc_pointContainerLeftRightPadding) {
             mPointContainerLeftRightPadding = typedArray.getDimensionPixelSize(attr, mPointContainerLeftRightPadding);
-        } else if (attr == R.styleable.RCBanner_banner_pointTopBottomMargin) {
+        } else if (attr == R.styleable.RCBanner_rc_pointTopBottomMargin) {
             mPointTopBottomMargin = typedArray.getDimensionPixelSize(attr, mPointTopBottomMargin);
-        } else if (attr == R.styleable.RCBanner_banner_indicatorGravity) {
+        } else if (attr == R.styleable.RCBanner_rc_indicatorGravity) {
             mPointGravity = typedArray.getInt(attr, mPointGravity);
-        } else if (attr == R.styleable.RCBanner_banner_pointAutoPlayAble) {
+        } else if (attr == R.styleable.RCBanner_rc_pointAutoPlayAble) {
             mAutoPlayAble = typedArray.getBoolean(attr, mAutoPlayAble);
-        } else if (attr == R.styleable.RCBanner_banner_pointAutoPlayInterval) {
+        } else if (attr == R.styleable.RCBanner_rc_pointAutoPlayInterval) {
             mAutoPlayInterval = typedArray.getInteger(attr, mAutoPlayInterval);
-        } else if (attr == R.styleable.RCBanner_banner_pageChangeDuration) {
+        } else if (attr == R.styleable.RCBanner_rc_pageChangeDuration) {
             mPageChangeDuration = typedArray.getInteger(attr, mPageChangeDuration);
-        } else if (attr == R.styleable.RCBanner_banner_placeholderDrawable) {
-            mPlaceholderDrawableResId = typedArray.getResourceId(attr, mPlaceholderDrawableResId);
-        } else if (attr == R.styleable.RCBanner_banner_isNeedShowIndicatorOnOnlyOnePage) {
+        } else if (attr == R.styleable.RCBanner_rc_isNeedShowIndicatorOnOnlyOnePage) {
             mIsNeedShowIndicatorOnOnlyOnePage = typedArray.getBoolean(attr, mIsNeedShowIndicatorOnOnlyOnePage);
-        } else if (attr == R.styleable.RCBanner_banner_contentBottomMargin) {
+        } else if (attr == R.styleable.RCBanner_rc_contentBottomMargin) {
             mContentBottomMargin = typedArray.getDimensionPixelSize(attr, mContentBottomMargin);
-        } else if (attr == R.styleable.RCBanner_banner_aspectRatio) {
+        } else if (attr == R.styleable.RCBanner_rc_aspectRatio) {
             mAspectRatio = typedArray.getFloat(attr, mAspectRatio);
         }
     }
@@ -160,7 +157,7 @@ public class RCBanner extends RelativeLayout implements RecyclerViewPager.OnPage
             LayoutParams indicatorLp = new LayoutParams(RWC, RWC);
             indicatorLp.addRule(CENTER_VERTICAL);
             mPointRealContainerLl = new LinearLayout(context);
-            mPointRealContainerLl.setId(R.id.banner_indicatorId);
+            mPointRealContainerLl.setId(R.id.rc_indicatorId);
             mPointRealContainerLl.setOrientation(LinearLayout.HORIZONTAL);
             mPointRealContainerLl.setGravity(Gravity.CENTER_VERTICAL);
             mPointContainerRl.addView(mPointRealContainerLl, indicatorLp);
@@ -348,6 +345,14 @@ public class RCBanner extends RelativeLayout implements RecyclerViewPager.OnPage
             startAutoPlay();
         } else {
             stopAutoPlay();
+        }
+    }
+
+    public void setAutoPlayAble(boolean autoPlayAble) {
+        mAutoPlayAble = autoPlayAble;
+        stopAutoPlay();
+        if (mViewPager != null && mViewPager.getAdapter() != null) {
+            mViewPager.getAdapter().notifyDataSetChanged();
         }
     }
 
